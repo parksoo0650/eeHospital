@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="public" template="/WEB-INF/views/layout/public.jsp">
+		<put-attribute name="title" value="한빛병원"/>
+		<put-attribute name="header" value="/WEB-INF/views/jsp/common/header.jsp" /><!-- 지가 알아서 헤더 찾아 갑니다. -->
+		<put-attribute name="gnb" value="/WEB-INF/views/jsp/common/gnb.jsp"/> 
+		<put-attribute name="container" value=""/> <!--널 값 주는 것이 포인트!!!  -->
+		<put-attribute name="footer" value="/WEB-INF/views/jsp/common/footer.jsp" />
+	</definition>
+	<definition name="public:*/*" extends="public">
+		<put-attribute name="container" value="/WEB-INF/views/jsp/{1}/{2}.jsp"/>
+	</definition>
+	<definition name="patient" template="/WEB-INF/views/layout/patient.jsp">
+		<put-attribute name="title" value="한빛병원"/>
+		<put-attribute name="header" value="/WEB-INF/views/jsp/common/header.jsp" /><!-- 지가 알아서 헤더 찾아 갑니다. -->
+		<put-attribute name="gnb" value="/WEB-INF/views/jsp/patient/gnb.jsp"/> 
+		<put-attribute name="container" value=""/> <!--널 값 주는 것이 포인트!!!  -->
+		<put-attribute name="footer" value="/WEB-INF/views/jsp/common/footer.jsp" />
+	</definition>
+	<definition name="patient:*/*" extends="patient">
+		<put-attribute name="container" value="/WEB-INF/views/jsp/{1}/{2}.jsp"/>
+	</definition>
+</tiles-definitions>
