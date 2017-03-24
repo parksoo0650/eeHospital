@@ -39,14 +39,14 @@
                         <td>${user.patAddr}</td>
                         <td>주치의</td>
                         <td>
-                        <a onclick="docDetail()" href="#">${user.docID}</a></td>
+                        <a onclick="docDetail()" href="#">한석규</a></td>
                   </tr>
             </table>
             </div>
             <script>
 		    function docDetail(){
 				alert('의사ID 클릭했음!!!');
-				location.href="${context}/doctor";
+				location.href="${context.path}/patient/doctor/han";
 			}
     		</script>
 </div>

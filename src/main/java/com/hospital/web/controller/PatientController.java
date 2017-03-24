@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,5 +27,11 @@ public class PatientController {
 		logger.info("PatientController - goLogin() {} !!", "POST");
 		model.addAttribute("name", "홍길동");
 		return "patient:patient/containerDetail";
+	}
+	@RequestMapping("/doctor/{docID}") //컨텍스트 한번 흩고 context 가서 wire한다.
+	public String getDoctorInfo(@PathVariable String docID){
+		logger.info("PatientController - getDoctorInfo() {} !!", "ENTER");
+		logger.info("PatientController - docID={} !!", docID);
+		return "patient:patient/doctorInfo";
 	}
 }
