@@ -12,6 +12,7 @@
 		<config>src/main/webapp/WEB-INF/tiles.xml</config>
 		<config>src/main/resources/META-INF/mybatis-context.xml</config>
 		<config>src/main/resources/com/hospital/web/mapper/PatientMapper.xml</config>
+		<config>src/main/resources/META-INF/mapper-context.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
