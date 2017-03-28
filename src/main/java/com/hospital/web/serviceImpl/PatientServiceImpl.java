@@ -57,5 +57,10 @@ public class PatientServiceImpl implements PatientService{
 		String temp="";
 	    	return temp;
 	    }
+		@Override
+		public int count() throws Exception {
+			logger.info("PatientController - count() {} !!", "ENTER");
+			return mapper.count();
+		}
 
 }

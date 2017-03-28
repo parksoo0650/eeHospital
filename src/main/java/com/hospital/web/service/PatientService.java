@@ -11,5 +11,6 @@ public interface PatientService {
 	    public boolean logout(PatientDTO member)throws Exception;
 	    public int change(PatientDTO member)throws Exception;
 	    public int remove(PatientDTO member)throws Exception; //비밀번호 노출,공개키
-	    public String getBirth();
+	    public String getBirth() throws Exception;
+	    public int count() throws Exception; 
 }
