@@ -14,7 +14,17 @@ import com.hospital.web.domain.PatientDTO;
 import com.hospital.web.mapper.PatientMapper;
 import com.hospital.web.service.ExistService;
 import com.hospital.web.service.PatientService;
-
+/**
+ * =================================
+ * @fileName :Patient Controlller
+ * @date : 2017-03-28
+ * @author : Park Seoungsoo
+ * @story
+ * @method
+ * Join()
+ * login()
+ * =================================
+ */
 @Controller
 @RequestMapping(value="/patient")
 public class PatientController {
@@ -23,17 +33,17 @@ public class PatientController {
 	@Autowired PatientDTO patient;
 	@Autowired PatientMapper mapper;
  	@RequestMapping("/join") //컨텍스트 한번 흩고 context 가서 wire한다.
-	public String goJoin(){
+	public String join(){
 		logger.info("PatientController - goJoin() {} !!", "ENTER");
 		return "public:patient/registerForm";
 	}
 	@RequestMapping("/login") //컨텍스트 한번 흩고 context 가서 wire한다.
-	public String goLogin(){
+	public String login(){
 		logger.info("PatientController - goLogin() {} !!", "ENTER");
 		return "public:common/loginForm";
 	}
 	@RequestMapping(value="/login", method=RequestMethod.POST) //컨텍스트 한번 흩고 context 가서 wire한다.
-	public String goLogin(@RequestParam("id") String id ,
+	public String login(@RequestParam("id") String id ,
 			@RequestParam("password") String password
 			,Model model) throws Exception{ //이미 존재하는 것이기 때문에 
 		logger.info("PatientController - goLogin() {} !!", "POST");
