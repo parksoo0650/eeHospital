@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.hospital.web.domain.PatientDTO;
+import com.hospital.web.domain.Patient;
 import com.hospital.web.mapper.PatientMapper;
-import com.hospital.web.service.ExistService;
-import com.hospital.web.service.PatientService;
+import com.hospital.web.service.CRUD;
+import com.hospital.web.service.CRUD.Service;
 /**
  * =================================
  * @fileName :Patient Controlller
@@ -29,8 +29,7 @@ import com.hospital.web.service.PatientService;
 @RequestMapping(value="/patient")
 public class PatientController {
 	private static final Logger logger = LoggerFactory.getLogger(PatientController.class);
-	@Autowired PatientService service; //서비스 호출 
-	@Autowired PatientDTO patient;
+	@Autowired Patient patient;
 	@Autowired PatientMapper mapper;
  	@RequestMapping("/join") //컨텍스트 한번 흩고 context 가서 wire한다.
 	public String join(){
@@ -50,22 +49,29 @@ public class PatientController {
 		logger.info("PatientController - id, pw: {}", id+","+password);
 		patient.setPatID(id);
 		patient.setPatPass(password);
-		ExistService ex = new ExistService() {
+		CRUD.Service ex = new CRUD.Service() {
 			@Override
-			public int exist(Object o) throws Exception {
+			public Object execute(Object o) throws Exception {
 				logger.info("ID ? : {}", o);
 				return mapper.exist(id);
 			}
 		};
-		int count=ex.exist(id);
+		Integer count=(Integer) ex.execute(id);
 		logger.info("DB ID exist ? : {}", count);
 		String movePosition="";
 		if(count==0){
 			logger.info("DB 다녀온 결과 : {}", "ID not exist");
 			movePosition="public:common/loginForm";
 		}else{
-			patient=service.login(patient);
-			
+			CRUD.Service service=new CRUD.Service() {
+				
+				@Override
+				public Object execute(Object o) throws Exception {
+					// TODO Auto-generated method stub
+					return mapper.selectById(id);
+				}
+			};
+			patient=(Patient) service.execute(patient);
 			if(patient.getPatPass().equals(password)){
 				logger.info("DB 다녀온 결과 : {}", "success");
 				movePosition="patient:patient/containerDetail";

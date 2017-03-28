@@ -7,11 +7,6 @@
 <link rel="stylesheet" href="${css}/hanbit.css" />
 </head>
 <body>
-<div id="wrapper" class="width_full_size" style="height:100%;">
-<div id="header" class="width_full_size position_fixed" style="height:100px">
-<div class="logo_box width_full_size" style="height:60%;">
-<img src="${context.img}/common/index_logo.png" class="image_center" />
-</div>
 <div style="height:100px"></div>
 <div id="container" class="width_full_size" style="height:600px;">
 <table class="table_default margin_center" style="width:500px;height:200px;margin-top:15px;">
@@ -48,7 +43,7 @@
 	</li>
 </ul>
 </div>
-</div>
+
 
 </body>
 </html>
