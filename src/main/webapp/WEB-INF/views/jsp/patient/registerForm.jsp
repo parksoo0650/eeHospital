@@ -136,7 +136,7 @@ $(function() {
 	var $regForm=$('#regForm');
 	var tab = $regForm.find('table');
 	$('#regNext').click(function() {
-		$regForm.attr("action","${context}/patient.do");
+		$regForm.attr("action","${context.path}/patient/regist");
 		$regForm.attr("method","post");
 		alert('전송직전');
 		$regForm.submit();	

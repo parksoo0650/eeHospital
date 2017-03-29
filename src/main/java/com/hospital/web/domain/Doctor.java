@@ -1,11 +1,15 @@
 package com.hospital.web.domain;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-@Component @Data
-public class Doctor {
-	@Setter @Getter
-    private String docID, docPass, majorTreat, docName, docGen, docPhone, docEmail, docPosition;
+@Component @Lazy @Data 
+public class Doctor extends Info{
+    private String major,Position;
+
+    @Override
+	public String getGroup() {
+		// TODO Auto-generated method stub
+		return "Doctor";
+	}
 }

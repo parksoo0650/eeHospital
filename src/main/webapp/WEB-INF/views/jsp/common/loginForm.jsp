@@ -17,6 +17,10 @@
 	</tr>
 	
 </table>
+<input type="radio" name="permission" value="patient" checked> 고객
+<input type="radio" name="permission" value="doctor"> 의사
+<input type="radio" name="permission" value="nurse"> 간호사
+<input type="radio" name="permission" value="admin"> 관리자
 <input type="hidden" name="action" value="login"/>
 <input type="hidden" name="page" value="main"/>
 
@@ -26,11 +30,13 @@
 $(function(){
 	var $loginForm=$('#loginForm');
 	var tab=$loginForm.find('table');
-	$('#container').addClass('margin_center').css('margin-top','10%');
 
-	$loginForm.addClass('margin_center').css('width','20');
+	$('#container').addClass('width_full_size').css('height','300%').addClass('margin_center');
+	 $loginForm.addClass('margin_center').css('margin-top','50px').css('margin-left','40%');
 	$('#loginForm input[value=로그인]').click(function() {
-		$loginForm.attr("action","${context.path}/patient/login");
+		var permission=$loginForm.find(':radio[name=permission]:checked').val();
+		alert("PERMISSION:"+permission);
+		$loginForm.attr("action","${context.path}/"+permission+"/login");
 		$loginForm.attr("method","post");
 		var idVal=tab.find('input[name=id]').val();
 		var pwVal=tab.find('input[name=password]').val();

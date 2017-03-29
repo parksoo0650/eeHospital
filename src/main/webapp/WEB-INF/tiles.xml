@@ -21,7 +21,7 @@
 	<definition name="patient:*/*" extends="patient">
 		<put-attribute name="container" value="/WEB-INF/views/jsp/{1}/{2}.jsp"/>
 	</definition>
-	<definition name="doctor" template="/WEB-INF/views/layout/patient.jsp">
+		<definition name="doctor" template="/WEB-INF/views/layout/doctor.jsp">
 		<put-attribute name="title" value="한빛병원"/>
 		<put-attribute name="header" value="/WEB-INF/views/jsp/common/header.jsp" /><!-- 지가 알아서 헤더 찾아 갑니다. -->
 		<put-attribute name="gnb" value="/WEB-INF/views/jsp/patient/gnb.jsp"/> 

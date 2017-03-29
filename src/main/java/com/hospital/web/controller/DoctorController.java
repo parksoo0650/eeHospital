@@ -10,15 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value="/doctor")
 public class DoctorController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-	@RequestMapping("/login")
-	public String goLogin(){
+	@RequestMapping("/join")
+	public String join(){
 		logger.info("DoctorController - goLogin() {} !!", "ENTER");
 		return "public:common/loginForm";
 	}
 	@RequestMapping("/detail/{docID}")
 	public String detail(@PathVariable String docID){
 		logger.info("DoctorController - goLogin() {} !!", "ENTER");
-		
 		return "doctor:doctor/containerDetail";
 	}
 }
