@@ -7,7 +7,7 @@ public enum Enums {
 	Enums(String val){
 		this.val=val;
 	}
-	public String getGroup(){
+	public String val(){
 		return val;
 	}
 }

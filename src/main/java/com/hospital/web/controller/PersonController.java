@@ -31,7 +31,7 @@ public class PersonController {
 	public String join(@PathVariable String type,
 			@RequestBody Map<String,Object>map,
 			Command command) throws Exception{ //@ModelAttribute Patient patient -- 완전히 일치 할 때 쓴다.
-		logger.info("PersonController - goLogin() {} !!", "ENTER");
+		logger.info("PersonController - join() {} !!", "ENTER");
 		if(type.equals("")){
 			type="patient";
 		}

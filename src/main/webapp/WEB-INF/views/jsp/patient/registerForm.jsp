@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="${css}/hanbit.css" />
 <div id="container" class="width_full_size" style="height:800px;">
-
-	<form id="regForm" style="width:40%;margin-top:15px;" class="margin_center" >
+	<form id="regForm" style="width:40%;margin-top:15px;" class="margin_center">
 		<table class="table_default">
 			<tr>
 				<td>
@@ -125,14 +124,17 @@
 		<input type="hidden" name="action" value="register"/>
 		<input type="hidden" name="page" value="main"/>
 		<div>
+		<input type="radio" name="type" value="patient" checked> 고객
+		<input type="radio" name="type" value="doctor"> 의사
+		<input type="radio" name="type" value="nurse"> 간호사
+		<input type="radio" name="type" value="admin"> 관리자
+		</div>
+		<div>
 		<a href="#" id="" class="button_link button_visited button_action button_hover" style="width:180px;">이전</a>
 		<a href="#" id="regNext" class="button_link button_visited button_action button_hover" style="width:180px;">다음</a>
 		</div>
 	</form>
-<input type="radio" name="type" value="patient" checked> 고객
-<input type="radio" name="type" value="doctor"> 의사
-<input type="radio" name="type" value="nurse"> 간호사
-<input type="radio" name="type" value="admin"> 관리자
+
 </div>
 <jsp:include page="../common/footer.jsp"/>
 <script>
@@ -140,7 +142,7 @@ $(function() {
 	var $regForm=$('#regForm');
 	var tab = $regForm.find('table');
 	$('#regNext').click(function() {
-		var type=$loginForm.find(':radio[name=type]:checked').val();
+		var type=$regForm.find(':radio[name=type]:checked').val();
 		alert("TYPE:"+type);
 		$regForm.attr("action","${context.path}/register/"+type);
 		$regForm.attr("method","post");

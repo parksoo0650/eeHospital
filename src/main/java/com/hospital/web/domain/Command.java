@@ -1,5 +1,6 @@
 package com.hospital.web.domain;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -50,7 +51,18 @@ public class Command implements Orderable{
 				person=new Person<Info>(new Patient());
 				Patient patient = (Patient) person.getInfo();
 				patient.setId(map.get("id").toString());
-				//이하 setter는 생략
+				patient.setPass(map.get("pass").toString());
+				patient.setName(map.get("name").toString());
+				patient.setEmail(map.get("email").toString());
+				patient.setAddr(map.get("addr").toString());
+				patient.setName(map.get("phone").toString());
+				patient.setEmail(map.get("job").toString());
+				patient.setAddr(map.get("gen").toString());
+				patient.setName(map.get("nur_id").toString());
+				patient.setEmail(map.get("doc_id").toString());
+				patient.setAddr(map.get("jumin").toString());
+				map.put("patient",patient);
+				
 				break; 
 			case "doctor" : 
 				person=new Person<Info>(new Doctor());

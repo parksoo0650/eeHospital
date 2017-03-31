@@ -24,6 +24,7 @@ import com.hospital.web.domain.Person;
 import com.hospital.web.domain.Enums;
 import com.hospital.web.mapper.Mapper;
 import com.hospital.web.service.CRUD;
+import com.hospital.web.service.ReadService;
 
 @Controller
 @SessionAttributes("permission")
@@ -101,23 +102,18 @@ public class PermissionController {
 			patient.setPass(password);
 			Map<String,Object>map=new HashMap<>();
 			map.put("group", patient.getGroup());
-			map.put("key", Enums.PATIENT.getGroup());
+			map.put("key", Enums.PATIENT.val());
 			map.put("value", id);
-			CRUD.Service ex = new CRUD.Service() {
-				@Override
-				public Object execute(Object o) throws Exception {
-					logger.info("ID ? : {}", o);
-					return mapper.exist(map);
-				}
-			};
-			Integer count=(Integer) ex.execute(id);
+			ReadService exist = (Map<?,?>paramMap)->mapper.exist(paramMap);
+			Integer count=(Integer) exist.execute(map);
 			logger.info("DB ID exist ? : {}", count);
 			
 			if(count==0){
 				logger.info("DB 다녀온 결과 : {}", "ID not exist");
 				movePosition="public:common/loginForm";
 			}else{
-				patient=(Patient) mapper.findPatient(map);
+				ReadService findPatient=(paramMap)->mapper.findPatient(paramMap);
+				 patient=(Patient) findPatient.execute(map);
 				if(patient.getPass().equals(password)){
 					logger.info("DB 다녀온 결과 : {}", "success");
 					session.setAttribute("permission", patient);
@@ -136,30 +132,18 @@ public class PermissionController {
 			doctor.setPass(password);
 			Map<String,Object>dmap=new HashMap<>();
 			dmap.put("group", doctor.getGroup());
-			dmap.put("key", Enums.DOCTOR.getGroup());
+			dmap.put("key", Enums.DOCTOR.val());
 			dmap.put("value", id);
-			CRUD.Service docEx = new CRUD.Service() {
-				@Override
-				public Object execute(Object o) throws Exception {
-					logger.info("ID ? : {}", o);
-					return mapper.exist(dmap);
-				}
-			};
-			Integer doc_count=(Integer) docEx.execute(id);
+			ReadService docexist = (Map<?,?>paramMap)->mapper.exist(paramMap);
+			Integer doc_count=(Integer) docexist.execute(dmap);
 			logger.info("DB ID exist ? : {}", doc_count);
 			
 			if(doc_count==0){
 				logger.info("DB 다녀온 결과 : {}", "ID not exist");
 				movePosition="public:common/loginForm";
 			}else{
-				CRUD.Service service=new CRUD.Service() {
-	
-					@Override
-					public Object execute(Object o) throws Exception {
-						return mapper.findDoctor(dmap);
-					}
-				};
-				doctor=(Doctor) service.execute(doctor);
+				ReadService findDoctor=(paramMap)->mapper.findDoctor(dmap);
+				doctor=(Doctor) findDoctor.execute(dmap);
 				if(doctor.getPass().equals(password)){
 					logger.info("DB 다녀온 결과 : {}", "success");
 					session.setAttribute("permission", doctor);
@@ -179,30 +163,18 @@ public class PermissionController {
 			nurse.setPass(password);
 			Map<String,Object>nmap=new HashMap<>();
 			nmap.put("group", nurse.getGroup());
-			nmap.put("key", Enums.NURSE.getGroup());
+			nmap.put("key", Enums.NURSE.val());
 			nmap.put("value", id);
-			CRUD.Service nex = new CRUD.Service() {
-				@Override
-				public Object execute(Object o) throws Exception {
-					logger.info("ID ? : {}", o);
-					return mapper.exist(nmap);
-				}
-			};
-			Integer ncount=(Integer) nex.execute(id);
+			ReadService nexist=(paramMap)->mapper.findNurse(nmap);
+			Integer ncount=(Integer) nexist.execute(nmap);
 			logger.info("DB ID exist ? : {}", ncount);
 			
 			if(ncount==0){
 				logger.info("DB 다녀온 결과 : {}", "ID not exist");
 				movePosition="public:common/loginForm";
 			}else{
-				CRUD.Service service=new CRUD.Service() {
-	
-					@Override
-					public Object execute(Object o) throws Exception {
-						return mapper.findNurse(nmap);
-					}
-				};
-				nurse=(Nurse) service.execute(nurse);
+				ReadService Nursefind=(paramMap)->mapper.findNurse(nmap);
+				nurse=(Nurse) Nursefind.execute(nmap);
 				if(nurse.getPass().equals(password)){
 					logger.info("DB 다녀온 결과 : {}", "success");
 					session.setAttribute("permission", nurse);
