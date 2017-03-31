@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 @Component @Lazy @Data 
 public class Doctor extends Info{
-    private String major,Position;
+    private String major,position;
 
     @Override
 	public String getGroup() {

@@ -19,7 +19,7 @@
 <resultMap id="Doctor" type="com.hospital.web.domain.Doctor">
 	<id property="id" column="doc_id"/>
 	<id property="pass" column="doc_pass"/>
-	<id property="major" column="majorTreat"/>
+	<id property="major" column="major_treat"/>
 	<id property="name" column="doc_name"/>
 	<id property="position" column="doc_position"/>
 	<id property="phone" column="doc_phone"/>
@@ -207,5 +207,10 @@
   	 SELECT * FROM Patient
   WHERE title LIKE #{pattern}
 </select>
+<delete id="delete" parameterType="hashMap">
+	DELETE 
+	FROM ${group}
+	WHERE ${key}=#{value}
+</delete>
 
 </mapper>

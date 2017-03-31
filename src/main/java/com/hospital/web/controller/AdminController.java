@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
-	private static final Logger logger = LoggerFactory.getLogger(DoctorController.class);
+	private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
 	@RequestMapping("/login")
 	public String goLogin(){
 		logger.info("AdminController - goLogin() {} !!", "ENTER");

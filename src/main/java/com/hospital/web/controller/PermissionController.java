@@ -21,7 +21,7 @@ import com.hospital.web.domain.Info;
 import com.hospital.web.domain.Nurse;
 import com.hospital.web.domain.Patient;
 import com.hospital.web.domain.Person;
-import com.hospital.web.domain.Schema;
+import com.hospital.web.domain.Enums;
 import com.hospital.web.mapper.Mapper;
 import com.hospital.web.service.CRUD;
 
@@ -35,7 +35,7 @@ public class PermissionController {
 		logger.info("PermissionController - login() {} !!", "ENTER");
 		return "public:common/loginForm";
 	}
-	@RequestMapping(value="/{permission}/regist", method=RequestMethod.POST)
+	//@RequestMapping(value="/{permission}/regist", method=RequestMethod.POST)
 	public String regist(@PathVariable String permission,
 			@RequestParam("id") String id,
 			@RequestParam("password") String password,
@@ -56,7 +56,7 @@ public class PermissionController {
 			patient.setAddr(addr);
 			Map<String,Object>map=new HashMap<>();
 			map.put("group", patient.getGroup());
-			map.put("id", patient.getId());
+			map.put("patient", patient);
 			map.put("pass", patient.getPass());
 			map.put("name", patient.getName());
 			map.put("email", patient.getEmail());
@@ -100,7 +100,7 @@ public class PermissionController {
 			patient.setPass(password);
 			Map<String,Object>map=new HashMap<>();
 			map.put("group", patient.getGroup());
-			map.put("key", Schema.PATIENT.getGroup());
+			map.put("key", Enums.PATIENT.getGroup());
 			map.put("value", id);
 			CRUD.Service ex = new CRUD.Service() {
 				@Override
@@ -116,21 +116,14 @@ public class PermissionController {
 				logger.info("DB 다녀온 결과 : {}", "ID not exist");
 				movePosition="public:common/loginForm";
 			}else{
-				CRUD.Service service=new CRUD.Service() {
-	
-					@Override
-					public Object execute(Object o) throws Exception {
-						return mapper.findPatient(map);
-					}
-				};
-				patient=(Patient) service.execute(patient);
+				patient=(Patient) mapper.findPatient(map);
 				if(patient.getPass().equals(password)){
 					logger.info("DB 다녀온 결과 : {}", "success");
 					session.setAttribute("permission", patient);
+					model.addAttribute("user", patient);
 					movePosition="patient:patient/containerDetail";
 				}else{
 					logger.info("DB 다녀온 결과 : {}", "password not match");
-					model.addAttribute("name", patient);
 					movePosition="public:common/loginForm";
 				}
 			}
@@ -142,7 +135,7 @@ public class PermissionController {
 			doctor.setPass(password);
 			Map<String,Object>dmap=new HashMap<>();
 			dmap.put("group", doctor.getGroup());
-			dmap.put("key", Schema.DOCTOR.getGroup());
+			dmap.put("key", Enums.DOCTOR.getGroup());
 			dmap.put("value", id);
 			CRUD.Service docEx = new CRUD.Service() {
 				@Override
@@ -169,10 +162,10 @@ public class PermissionController {
 				if(doctor.getPass().equals(password)){
 					logger.info("DB 다녀온 결과 : {}", "success");
 					session.setAttribute("permission", doctor);
+					model.addAttribute("doctor", doctor);
 					movePosition="doctor:doctor/containerDetail";
 				}else{
 					logger.info("DB 다녀온 결과 : {}", "password not match");
-					model.addAttribute("name", doctor);
 					movePosition="public:common/loginForm";
 				}
 			}
@@ -185,7 +178,7 @@ public class PermissionController {
 			nurse.setPass(password);
 			Map<String,Object>nmap=new HashMap<>();
 			nmap.put("group", nurse.getGroup());
-			nmap.put("key", Schema.NURSE.getGroup());
+			nmap.put("key", Enums.NURSE.getGroup());
 			nmap.put("value", id);
 			CRUD.Service nex = new CRUD.Service() {
 				@Override

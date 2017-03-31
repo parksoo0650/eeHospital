@@ -13,7 +13,7 @@ import com.hospital.web.domain.Patient;
 import com.hospital.web.domain.Person;
 @Repository //똑같은 액션이 반복됨
 public interface Mapper {
-	public int registPatient(Map<?,?>map) throws Exception;
+	public int registPatient(Object o) throws Exception;
 	public int registDoctor(Doctor doctor) throws Exception;
 	public int registNurse(Nurse nurse) throws Exception;
     public Patient findPatient(Map<?,?> map) throws Exception;
