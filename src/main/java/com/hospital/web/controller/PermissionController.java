@@ -29,6 +29,7 @@ import com.hospital.web.service.CRUD;
 @SessionAttributes("permission")
 public class PermissionController {
 	private static final Logger logger = LoggerFactory.getLogger(PermissionController.class);
+	
 	@Autowired Mapper mapper;
 	@RequestMapping("/login") //컨텍스트 한번 흩고 context 가서 wire한다.
 	public String login(){
